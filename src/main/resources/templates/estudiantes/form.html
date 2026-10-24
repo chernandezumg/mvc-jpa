@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Nuevo Estudiante</title></head>
+<body>
+<h1>Nuevo Estudiante</h1>
+
+<form th:action="@{/estudiantes}" method="post" th:object="${estudiante}">
+  <!-- Resumen de errores del formulario -->
+  <div th:if="${#fields.hasErrors('*')}" style="background:#ffecec; border-left:4px solid #e74c3c; padding:.75rem; margin-bottom:1rem;">
+    <ul style="margin:0; padding-left:1.2rem;">
+      <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+    </ul>
+  </div>
+
+  <div>
+    <label>ID:</label>
+    <input type="number" th:field="*{id}" required />
+    <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:#e74c3c; font-size:.9rem;"></div>
+  </div>
+
+  <div>
+    <label>Nombre:</label>
+    <input type="text" th:field="*{nombre}" required />
+    <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color:#e74c3c; font-size:.9rem;"></div>
+  </div>
+
+  <div>
+    <button type="submit">Guardar</button>
+    <a th:href="@{/estudiantes}">Cancelar</a>
+  </div>
+</form>
+
+</body>
+</html>
